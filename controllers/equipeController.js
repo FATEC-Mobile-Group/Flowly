@@ -3,6 +3,10 @@ const User = require('../models/User');
 
 exports.criarEquipe = async (req, res) => {
   try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ erro: "Usuário não logado" });
+
     const { nome, descricao, vinculoEmpresarial, membros} = req.body;
 
     // Validação do nome da equipe
@@ -12,6 +16,10 @@ exports.criarEquipe = async (req, res) => {
 
     // Criar a equipe
     const novaEquipe = new Equipe({ nome, descricao, vinculoEmpresarial, membros });
+    await novaEquipe.save();
+
+    // Adicionar o criador como membro da equipe com papel de 'admin'
+    novaEquipe.membros.push({ user: userId, role: 'admin' });
     await novaEquipe.save();
 
     // Retornar a equipe criada com os dados populados
