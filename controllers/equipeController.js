@@ -80,7 +80,7 @@ exports.excluirEquipe = async (req, res) => {
   }
 };
 
-exports.getMembrosEquipe = async (req, res) => {
+exports.obterMembrosEquipe = async (req, res) => {
   try {
     const equipe = await Equipe.findById(req.params.id).populate("membros", "nome");
     if (!equipe) return res.status(404).json({ erro: "Equipe não encontrada" });

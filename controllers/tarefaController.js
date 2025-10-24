@@ -29,19 +29,25 @@ exports.criarTarefa = async (req, res) => {
   }
 };
 
-// ADMIN: listar tarefas (ou filtrar por aluno/equipe)
+// MEMBRO: listar tarefas publicas
 exports.listarTarefas = async (req, res) => {
   try {
-    const { aluno, equipe } = req.query;
-    const filtro = {};
-    if (aluno) filtro.aluno = aluno;
-    if (equipe) filtro.equipe = equipe;
-
-    const tarefas = await Tarefa.find(filtro)
-      .populate('aluno', 'nome')
+    const tarefas = await Tarefa.find({ visivelAtodos: true })
       .populate('equipe', 'nome')
-      .sort({ urgencia: -1, dataEntrega: 1 }); // Ordena por urgência (alta > média > baixa) e depois por data
-    res.json(tarefas);
+        .sort({ createdAt: -1 });
+    res.status(200).json(tarefas);
+    } catch (err) {
+    res.status(500).json({ erro: 'Erro ao listar tarefas' });
+  }
+};
+
+// ADMIN: listar tarefas
+exports.listarTarefasPrivadas = async (req, res) => {
+  try {
+    const tarefas = await Tarefa.find({ visivelAtodos: false })
+      .populate('equipe', 'nome')
+      .sort({ createdAt: -1 });
+    res.status(200).json(tarefas);
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao listar tarefas' });
   }
@@ -78,7 +84,7 @@ exports.excluirTarefa = async (req, res) => {
 };
 
 // MEMBRO: visualizar suas tarefas
-exports.minhasTarefas = async (req, res) => {
+exports.listarMinhasTarefas = async (req, res) => {
   try {
     const tarefas = await Tarefa.find({ associado: req.user.id })
       .populate('equipe', 'nome');
