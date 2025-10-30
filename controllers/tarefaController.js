@@ -7,8 +7,31 @@ exports.criarTarefa = async (req, res) => {
   try {
     const { nome, descricao, prazo, dificuldade, prioridade, associado, status, projeto, visivelAtodos } = req.body;
 
-    const user = await User.findById(aluno);
-    if (!user || user.tipo !== 'aluno') return res.status(400).json({ erro: 'Aluno inválido' });
+    if (!nome || !prazo || !projeto) {
+      return res.status(400).json({ erro: 'Campos obrigatórios ausentes: nome, prazo e projeto' });
+    }
+
+    if (associado) {
+      const user = await User.findById(associado);
+      if (!user) return res.status(400).json({ erro: 'Usuário associado inválido' });
+    }
+
+    const proj = await Projeto.findById(projeto);
+    if (!proj) return res.status(400).json({ erro: 'Projeto inválido' });
+
+    const equipeId = proj.equipe;
+    if (!equipeId) return res.status(400).json({ erro: 'Projeto não pertence a nenhuma equipe' });
+
+    const equipeDoc = await Equipe.findById(equipeId);
+    if (!equipeDoc) return res.status(404).json({ erro: 'Equipe do projeto não encontrada' });
+
+    const userId = req.user && req.user.id;
+    if (!userId) return res.status(401).json({ erro: 'Usuário não autenticado' });
+
+    const membro = equipeDoc.membros.find(m => m.user.toString() === userId);
+    if (!membro || membro.role !== 'admin') {
+      return res.status(403).json({ erro: 'Acesso restrito a administradores da equipe' });
+    }
 
     const tarefa = new Tarefa({ 
       nome,
@@ -16,10 +39,10 @@ exports.criarTarefa = async (req, res) => {
       prazo,
       dificuldade,
       prioridade,
-      associado,
-      status,
+      associado: associado || null,
+      status: status || 'pendente',
       projeto,
-      visivelAtodos
+      visivelAtodos: visivelAtodos !== undefined ? visivelAtodos : true
     });
     await tarefa.save();
 

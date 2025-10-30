@@ -6,7 +6,6 @@ const JWT_SECRET = process.env.JWT_SECRET || 'sua_chave_secreta';
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
 
-  // Verifica se o header existe e começa com "Bearer "
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ mensagem: 'Token não fornecido.' });
   }

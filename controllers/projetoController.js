@@ -1,4 +1,6 @@
 const Projeto = require('../models/Projeto');
+const Equipe = require('../models/Equipe');
+const User = require('../models/User');
 
 // Criar projeto
 exports.criarProjeto = async (req, res) => {
@@ -9,9 +11,45 @@ exports.criarProjeto = async (req, res) => {
       return res.status(400).json({ erro: 'Campos obrigatórios ausentes: nome e equipe' });
     }
 
+    const equipeDoc = await Equipe.findById(equipe);
+    if (!equipeDoc) return res.status(404).json({ erro: 'Equipe não encontrada' });
+
+    const userId = req.user && req.user.id;
+    if (!userId) return res.status(401).json({ erro: 'Usuário não autenticado' });
+
+    const membro = equipeDoc.membros.find(m => m.user.toString() === userId);
+    if (!membro || membro.role !== 'admin') {
+      return res.status(403).json({ erro: 'Acesso restrito a administradores da equipe' });
+    }
+
     const projeto = new Projeto({ nome, descricao, equipe });
     await projeto.save();
 
+    try {
+      equipeDoc.projetos = equipeDoc.projetos || [];
+      equipeDoc.projetos.push(projeto._id);
+      await equipeDoc.save();
+    } catch (err) {
+      console.error('Erro ao atualizar equipe com projeto:', err.message);
+    }
+
+    try {
+      for (const membro of equipeDoc.membros) {
+        const membroId = membro.user;
+        if (!membroId) continue;
+        const membroUser = await User.findById(membroId);
+        if (!membroUser) continue;
+        membroUser.equipes = membroUser.equipes || [];
+        const hasEquipe = membroUser.equipes.some(eid => eid.toString() === equipeDoc._id.toString());
+        if (!hasEquipe) {
+          membroUser.equipes.push(equipeDoc._id);
+          await membroUser.save();
+        }
+      }
+    } catch (err) {
+      console.error('Erro ao sincronizar equipes nos usuários da equipe:', err.message);
+    }
+    
     res.status(201).json(projeto);
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao criar projeto', detalhe: err.message });

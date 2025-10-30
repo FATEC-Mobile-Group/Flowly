@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middlewares/auth');
-const { isAdmin } = require('../middlewares/checkAdmin');
+const auth = require('../middleware/auth');
+const { isAdmin } = require('../middleware/checkAdmin');
 const equipeController = require('../controllers/equipeController');
-const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middleware/authMiddleware');
 
-// Middleware: autenticado + admin
 router.use(auth, authMiddleware);
 
 router.post('/', equipeController.criarEquipe);
 router.get('/', equipeController.listarEquipes);
-router.get('/:id', equipeController.obterEquipe);
-router.put('/:id', isAdmin, equipeController.editarEquipe);
-router.delete('/:id', isAdmin, equipeController.excluirEquipe);
-router.get("/:id/membros", equipeController.obterMembrosEquipe);
+router.get('/:equipeId', equipeController.obterEquipe);
+router.put('/:equipeId', isAdmin, equipeController.editarEquipe);
+router.delete('/:equipeId', isAdmin, equipeController.excluirEquipe);
+router.get('/:equipeId/membros', equipeController.obterMembrosEquipe);
 
 module.exports = router;

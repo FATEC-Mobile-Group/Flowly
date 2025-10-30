@@ -22,6 +22,14 @@ exports.criarEquipe = async (req, res) => {
     novaEquipe.membros.push({ user: userId, role: 'admin' });
     await novaEquipe.save();
 
+    try {
+      user.equipes = user.equipes || [];
+      user.equipes.push(novaEquipe._id);
+      await user.save();
+    } catch (err) {
+      console.error('Erro ao atualizar usuário com equipe:', err.message);
+    }
+
     // Retornar a equipe criada com os dados populados
     const equipePopulada = await Equipe.findById(novaEquipe._id).populate('membros', 'nome email');
     res.status(201).json(equipePopulada);
@@ -41,7 +49,8 @@ exports.listarEquipes = async (req, res) => {
 
 exports.obterEquipe = async (req, res) => {
   try {
-    const equipe = await Equipe.findById(req.params.id).populate('membros', 'nome descricao');
+    const id = req.params.equipeId || req.params.id;
+    const equipe = await Equipe.findById(id).populate('membros', 'nome descricao');
     if (!equipe) return res.status(404).json({ erro: 'Equipe não encontrada' });
     res.json(equipe);
   } catch (err) {
@@ -52,9 +61,10 @@ exports.obterEquipe = async (req, res) => {
 exports.editarEquipe = async (req, res) => {
   try {
     const { nome, descricao, vinculoEmpresarial} = req.body;
+    const id = req.params.equipeId || req.params.id;
 
     const equipeAtualizada = await Equipe.findByIdAndUpdate(
-      req.params.id,
+      id,
       { nome, descricao, vinculoEmpresarial },
       { new: true }
     ).populate('membros', 'nome descricao');
@@ -73,7 +83,8 @@ exports.editarEquipe = async (req, res) => {
 
 exports.excluirEquipe = async (req, res) => {
   try {
-    await Equipe.findByIdAndDelete(req.params.id);
+    const id = req.params.equipeId || req.params.id;
+    await Equipe.findByIdAndDelete(id);
     res.json({ msg: 'Equipe excluída com sucesso' });
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao excluir equipe' });
@@ -82,7 +93,8 @@ exports.excluirEquipe = async (req, res) => {
 
 exports.obterMembrosEquipe = async (req, res) => {
   try {
-    const equipe = await Equipe.findById(req.params.id).populate("membros", "nome");
+    const id = req.params.equipeId || req.params.id;
+    const equipe = await Equipe.findById(id).populate("membros", "nome");
     if (!equipe) return res.status(404).json({ erro: "Equipe não encontrada" });
     res.json(equipe.membros);
   } catch (err) {

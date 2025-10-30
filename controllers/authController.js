@@ -7,7 +7,7 @@ exports.registrar = async (req, res) => {
     const { nome, email, senha } = req.body;
     const hash = await argon2.hash(senha);
 
-    const novoUsuario = new User({ nome, email, senha: hash, tipo });
+    const novoUsuario = new User({ nome, email, senha: hash });
     await novoUsuario.save();
 
     res.status(201).json({ msg: 'Usuário registrado com sucesso!' });
@@ -26,16 +26,15 @@ exports.login = async (req, res) => {
     const senhaValida = await argon2.verify(user.senha, senha);
     if (!senhaValida) return res.status(401).json({ erro: 'Senha inválida' });
 
-    const token = jwt.sign({ id: user._id, tipo: user.tipo }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-    res.json({ token, user: { id: user._id, nome: user.nome, tipo: user.tipo } });
-    
+  res.json({ token, user: { id: user._id, nome: user.nome } });
+
   } catch (err) {
     res.status(500).json({ erro: 'Erro no login', detalhe: err.message });
   }
 };
 
-// NOVO: Listar apenas usuários do tipo 'aluno'
 exports.listarUsuarios = async (req, res) => {
   try {
     const users = await User.find().select('nome email');
