@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowlyFront.views.DashboardPage"
+             BackgroundColor="#FFF9F4"
+    Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center" HorizontalOptions="Center">
+
+        <Label Text="Bem-vindo!"
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center" />
+
+        <Label Text="Você está logado com sucesso."
+               FontSize="18"
+               TextColor="#555"
+               HorizontalOptions="Center" />
+
+        <Button Text="Sair"
+                x:Name="LogoutButton"
+                BackgroundColor="#337BFF"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="8"
+                WidthRequest="200"
+                HeightRequest="45"/>
+    </VerticalStackLayout>
+</ContentPage>
