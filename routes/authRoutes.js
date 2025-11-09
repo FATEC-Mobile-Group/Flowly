@@ -5,5 +5,6 @@ const authController = require('../controllers/authController.js');
 router.post('/registrar', authController.registrar);
 router.post('/login', authController.login);
 router.get('/users', authController.listarUsuarios);
+router.get('/verify/:userId/:token', authController.verificarEmail);
 
 module.exports = router;
