@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const equipeRoutes = require('./routes/equipeRoutes');
 const tarefaRoutes = require('./routes/tarefaRoutes');
 const projetoRoutes = require('./routes/projetoRoutes');
+const conviteRoutes = require('./routes/conviteRoutes');
 
 const app = express();
 
@@ -14,9 +15,10 @@ app.use(express.json());
 
 // Rotas
 app.use('/api/auth', authRoutes);
-app.use('/api/equipes', equipeRoutes); // Certifique-se de que o arquivo equipesRoutes.js existe
-app.use('/api/tarefas', tarefaRoutes); // Certifique-se de que o arquivo tarefaRoutes.js existe
-app.use('/api/projetos', projetoRoutes); // Certifique-se de que o arquivo projetoRoutes.js existe
+app.use('/api/equipes', equipeRoutes);
+app.use('/api/tarefas', tarefaRoutes);
+app.use('/api/projetos', projetoRoutes); 
+app.use('/api/convites', conviteRoutes);
 
 // Tratamento de erros para rotas não encontradas
 app.use((req, res, next) => {

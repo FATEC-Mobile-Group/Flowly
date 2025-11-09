@@ -10,7 +10,7 @@ require('dotenv').config();
 
 exports.registrar = async (req, res) => {
   try {
-    const { nome, email, senha } = req.body;
+    const { nome, email, genero, senha } = req.body;
 
     // Validação da senha
     const passwordValidationResult = validatePassword(senha);
@@ -24,7 +24,7 @@ exports.registrar = async (req, res) => {
     }
 
     const hash = await argon2.hash(senha);
-    const novoUsuario = new User({ nome, email, senha: hash, verificado: false });
+    const novoUsuario = new User({ nome, email, genero, senha: hash, verificado: false });
     
 
     const token = await new Token({
