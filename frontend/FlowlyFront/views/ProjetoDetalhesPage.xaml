@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:FlowlyFront.converters"
+             xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls"
+             x:Class="FlowlyFront.views.ProjetoDetalhesPage"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <conv:StatusToFriendlyConverter x:Key="StatusToFriendlyConverter" />
+    </ContentPage.Resources>
+
+    <!-- Layout principal -->
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="16">
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+            <Button Text="‹" Clicked="OnVoltarClicked" WidthRequest="36" HeightRequest="36" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+            <Label Grid.Column="1" x:Name="TituloLabel" Text="Nome do projeto" FontAttributes="Bold" FontSize="22" TextColor="#0E1F44" VerticalOptions="Center" />
+            <Button Grid.Column="2" Text="≡" Clicked="OnHamburguerClicked" WidthRequest="36" HeightRequest="36" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+        </Grid>
+
+        <!-- Abas -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" Margin="0,12,0,8">
+            <Border Stroke="#6F63E7" StrokeThickness="1" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <Button Text="Tarefas" TextColor="#0E1F44" BackgroundColor="Transparent" Clicked="OnTabTarefasClicked" />
+            </Border>
+            <Border Grid.Column="1" Stroke="#6F63E7" StrokeThickness="1" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <Button Text="Membros" TextColor="#0E1F44" BackgroundColor="Transparent" Clicked="OnTabMembrosClicked" />
+            </Border>
+            <Border Grid.Column="2" Stroke="#6F63E7" StrokeThickness="1" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <Button Text="Estatísticas" TextColor="#0E1F44" BackgroundColor="Transparent" Clicked="OnTabStatsClicked" />
+            </Border>
+        </Grid>
+
+        <!-- Conteúdo -->
+        <Grid Grid.Row="2">
+            <!-- Tarefas agrupadas -->
+            <Grid x:Name="TarefasView" IsVisible="True">
+                <ScrollView>
+                    <VerticalStackLayout Spacing="12">
+                        <!-- Não associadas -->
+                        <VerticalStackLayout>
+                            <Label Text="Tarefas ainda não associadas" FontAttributes="Bold" TextColor="#0E1F44" />
+                            <CollectionView x:Name="NaoAssociadasCollection" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BackgroundColor="White" Stroke="#E0E0E0" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,6">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnTarefaTapped" CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                                <Label Text="{Binding nome}" FontAttributes="Bold" TextColor="#0E1F44" />
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding status, Converter={StaticResource StatusToFriendlyConverter}}" TextColor="#6B6B6B" />
+                                                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding descricao}" FontSize="13" TextColor="#6B6B6B" />
+                                                <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding prazo, StringFormat='Prazo: {0:dd/MM/yy}'}" FontSize="12" TextColor="#6B6B6B" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+
+                        <!-- Minhas tarefas -->
+                        <VerticalStackLayout>
+                            <Label Text="Minhas tarefas" FontAttributes="Bold" TextColor="#0E1F44" />
+                            <CollectionView x:Name="MinhasCollection" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BackgroundColor="White" Stroke="#E0E0E0" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,6">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnTarefaTapped" CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                                <Label Text="{Binding nome}" FontAttributes="Bold" TextColor="#0E1F44" />
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding status, Converter={StaticResource StatusToFriendlyConverter}}" TextColor="#6B6B6B" />
+                                                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding descricao}" FontSize="13" TextColor="#6B6B6B" />
+                                                <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding prazo, StringFormat='Prazo: {0:dd/MM/yy}'}" FontSize="12" TextColor="#6B6B6B" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+
+
+                        <!-- Em andamento -->
+                        <VerticalStackLayout>
+                            <Label Text="Tarefas em andamento" FontAttributes="Bold" TextColor="#0E1F44" />
+                            <CollectionView x:Name="EmAndamentoCollection" SelectionMode="None">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BackgroundColor="White" Stroke="#E0E0E0" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,6">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnTarefaTapped" CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                                <Label Text="{Binding nome}" FontAttributes="Bold" TextColor="#0E1F44" />
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding status, Converter={StaticResource StatusToFriendlyConverter}}" TextColor="#6B6B6B" />
+                                                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding descricao}" FontSize="13" TextColor="#6B6B6B" />
+                                                <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding prazo, StringFormat='Prazo: {0:dd/MM/yy}'}" FontSize="12" TextColor="#6B6B6B" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!-- Membros -->
+            <Grid x:Name="MembrosView" IsVisible="False">
+                <CollectionView x:Name="MembrosCollection" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="White" Stroke="#E0E0E0" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,6">
+                                <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*">
+                                    <Label Text="{Binding nome}" TextColor="#0E1F44" />
+                                    <Label Grid.Row="1" Text="{Binding email}" FontSize="12" TextColor="#6B6B6B" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <!-- Stats -->
+            <Grid x:Name="StatsView" IsVisible="False" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*" Padding="12">
+                <Label x:Name="ConcluidasLabel" Text="Concluídas: 0" TextColor="#0E1F44" />
+                <Label x:Name="PendentesLabel" Grid.Row="1" Text="Pendentes: 0" TextColor="#0E1F44" />
+                <Label x:Name="EmAndamentoLabel" Grid.Row="2" Text="Em andamento: 0" TextColor="#0E1F44" />
+            </Grid>
+        </Grid>
+
+        <!-- FAB Adicionar Tarefa -->
+        <Button Grid.Row="3" Text="Adicionar tarefa" Clicked="OnAdicionarTarefaClicked" BackgroundColor="#6F63E7" TextColor="White" CornerRadius="16" HeightRequest="44" />
+
+        <!-- Drawer lateral -->
+        <Grid x:Name="DrawerOverlay" IsVisible="False" BackgroundColor="#00000066" RowSpan="4">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnDrawerOverlayTapped" />
+            </Grid.GestureRecognizers>
+            <Grid HorizontalOptions="End" WidthRequest="280" BackgroundColor="#337BFF" Padding="16">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Nome do projeto" FontAttributes="Bold" FontSize="20" TextColor="White" />
+                    <Label x:Name="DrawerDescricaoLabel" Text="Descrição do projeto" TextColor="White" />
+                    <Button Text="Informações da equipe" BackgroundColor="White" TextColor="#0E1F44" Clicked="OnInfoEquipeClicked" />
+                    <Button Text="Minhas equipes" BackgroundColor="White" TextColor="#0E1F44" Clicked="OnMinhasEquipesClicked" />
+                    <Button Text="Sair do projeto" BackgroundColor="#FF4B4B" TextColor="White" Clicked="OnSairProjetoClicked" />
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

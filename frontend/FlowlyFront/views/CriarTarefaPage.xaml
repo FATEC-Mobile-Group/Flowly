@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls"
+             x:Class="FlowlyFront.views.CriarTarefaPage"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#0E1F44" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="#0E1F44" />
+            <Setter Property="PlaceholderColor" Value="#415381" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Margin" Value="0,6" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="PlaceholderColor" Value="#415381" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="PlaceholderColor" Value="#415381" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#8BA0C3" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style TargetType="Editor">
+            <Setter Property="TextColor" Value="#0E1F44" />
+            <Setter Property="PlaceholderColor" Value="#415381" />
+            <Setter Property="HeightRequest" Value="120" />
+            <Setter Property="Margin" Value="0,6" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="PlaceholderColor" Value="#415381" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="PlaceholderColor" Value="#415381" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#8BA0C3" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="#0E1F44" />
+            <Setter Property="TitleColor" Value="#415381" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Margin" Value="0,6" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="TitleColor" Value="#415381" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="TitleColor" Value="#415381" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#8BA0C3" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="TextColor" Value="#0E1F44" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Margin" Value="0,6" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#0E1F44" />
+                                <Setter Property="BackgroundColor" Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="#8BA0C3" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style TargetType="Switch">
+            <Setter Property="OnColor" Value="#7A89A9" />
+            <Setter Property="ThumbColor" Value="#0E1F44" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#0E1F44" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="CornerRadius" Value="24" />
+            <Setter Property="Margin" Value="0,8" />
+            <Setter Property="Padding" Value="16,8" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#0E1F44" />
+                                <Setter Property="TextColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#0B1A38" />
+                                <Setter Property="TextColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#B8C2D6" />
+                                <Setter Property="TextColor" Value="#F2F4F8" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <Label x:Name="HeaderLabel" Text="Criar tarefa" FontAttributes="Bold" FontSize="24" />
+            <Label x:Name="ProjetoLabel" Text="Projeto:" />
+
+            <Label Text="Nome da tarefa:" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <Entry x:Name="NomeEntry" Placeholder="Nome da tarefa" BackgroundColor="Transparent" />
+            </Border>
+            <Label Text="Descrição:" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <Editor x:Name="DescricaoEditor" Placeholder="Descrição" AutoSize="TextChanges" BackgroundColor="Transparent" />
+            </Border>
+            <Label Text="Prazo:" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto">
+                    <DatePicker x:Name="PrazoPicker" BackgroundColor="Transparent" TextColor="#0E1F44" DateSelected="OnPrazoSelected" />
+                    <Label Grid.Column="1" Text="🗓" FontSize="20" TextColor="#0E1F44" VerticalOptions="Center" Margin="8,0" />
+                </Grid>
+            </Border>
+
+            <!-- Dificuldade -->
+            <Label Text="Dificuldade:" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Picker x:Name="DificuldadePicker" Title="Selecione a dificuldade da tarefa.." TitleColor="#415381" TextColor="#0E1F44" BackgroundColor="Transparent" SelectedIndexChanged="OnDificuldadeChanged" ItemDisplayBinding="{Binding Text}" />
+                    <Label Grid.Column="1" Text="▾" FontSize="18" TextColor="#0E1F44" VerticalOptions="Center" Margin="8,0" />
+                </Grid>
+            </Border>
+
+            <!-- Prioridade -->
+            <Label Text="Urgência:" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Picker x:Name="PrioridadePicker" Title="Selecione a prioridade da tarefa.." TitleColor="#415381" TextColor="#0E1F44" BackgroundColor="Transparent" SelectedIndexChanged="OnPrioridadeChanged" ItemDisplayBinding="{Binding Text}" />
+                    <Label Grid.Column="1" Text="▾" FontSize="18" TextColor="#0E1F44" VerticalOptions="Center" Margin="8,0" />
+                </Grid>
+            </Border>
+
+            <!-- Status inicial -->
+            <Label Text="Status:" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Picker x:Name="StatusPicker" Title="Selecione o status.." TitleColor="#415381" TextColor="#0E1F44" BackgroundColor="Transparent" SelectedIndexChanged="OnStatusChanged" ItemDisplayBinding="{Binding Text}" />
+                    <Label Grid.Column="1" Text="▾" FontSize="18" TextColor="#0E1F44" VerticalOptions="Center" Margin="8,0" />
+                </Grid>
+            </Border>
+
+            <!-- Visível a todos -->
+            <Label Text="Visibilidade" FontAttributes="Bold" />
+            <Border Stroke="#4E8DFD" StrokeThickness="2" BackgroundColor="White" Padding="8">
+                <Border.StrokeShape>
+                    <shapes:RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <Label Text="Visível a todos" VerticalOptions="Center" />
+                    <Switch x:Name="VisivelSwitch" IsToggled="True" OnColor="#4E8DFD" ThumbColor="#0E1F44" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Button Text="Salvar" Clicked="OnSalvarClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

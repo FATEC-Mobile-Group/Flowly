@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowlyFront.views.CriarProjetoPage"
+             BackgroundColor="#F5F5F5">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+            <Label x:Name="HeaderLabel" Text="Criar projeto" FontSize="26" FontAttributes="Bold" TextColor="#0E1F44" />
+            <Label x:Name="EquipeContextLabel" Text="" FontSize="14" TextColor="#6B6B6B" />
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Nome do projeto" FontSize="15" TextColor="#0E1F44" />
+                <Border Stroke="#337BFF" StrokeThickness="1" StrokeShape="RoundRectangle 10" Padding="10">
+                    <Entry x:Name="NomeEntry" Placeholder="Digite o nome do projeto..." FontSize="16" TextColor="#0E1F44" PlaceholderColor="#8A8F98" BackgroundColor="White" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Descrição" FontSize="15" TextColor="#0E1F44" />
+                <Border Stroke="#337BFF" StrokeThickness="1" StrokeShape="RoundRectangle 10" Padding="10">
+                    <Editor x:Name="DescricaoEditor" HeightRequest="160" Placeholder="Descreva o projeto..." FontSize="16" TextColor="#0E1F44" PlaceholderColor="#8A8F98" BackgroundColor="White" />
+                </Border>
+            </VerticalStackLayout>
+
+            <Label x:Name="MessageLabel" IsVisible="False" FontSize="14" />
+
+            <Button x:Name="ConfirmButton" Text="Criar projeto"
+                    Clicked="OnCriarProjetoConfirmClicked"
+                    BackgroundColor="#337BFF"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="16"
+                    HeightRequest="48" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

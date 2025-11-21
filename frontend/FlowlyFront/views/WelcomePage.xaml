@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowlyFront.views.WelcomePage"
+             Title="WelcomePage"
+             BackgroundColor="#FFF9F4"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="*, Auto, Auto">
+
+        <Grid>
+            <Image Source="mainpage.jpg"
+                   Aspect="AspectFill" />
+
+            <GraphicsView HeightRequest="60"
+                          VerticalOptions="End"
+                          Drawable="{x:StaticResource CurvedDrawable}" />
+        </Grid>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="0,10"
+                             Spacing="15"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+
+            <Button Text="Criar conta"
+                    x:Name="CreateAccountButton"
+                    BackgroundColor="#337BFF"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    WidthRequest="200"
+                    HeightRequest="45"/>
+
+            <Button Text="Entrar"
+                    x:Name="LoginButton"
+                    BackgroundColor="Transparent"
+                    TextColor="#337BFF"
+                    BorderColor="#337BFF"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    WidthRequest="200"
+                    HeightRequest="45"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2"
+                             VerticalOptions="End"
+                             HorizontalOptions="Center"
+                             Margin="0,30">
+            <Label Text="made by" FontSize="12" TextColor="Black" HorizontalOptions="Center"/>
+            <Image Source="logo.png" HeightRequest="24"/>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

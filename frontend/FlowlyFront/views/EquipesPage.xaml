@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:FlowlyFront.components"
+             x:Class="FlowlyFront.views.EquipesPage"
+             Title="Equipes"
+             BackgroundColor="white"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid RowDefinitions="Auto, *, Auto">
+        
+        <VerticalStackLayout Grid.Row="0" 
+                             Padding="30,60,30,20"
+                             Spacing="5">
+            <Label Text="Olá"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#333333"
+                   HorizontalOptions="Start" />
+            
+            <Label Text="Como podemos ajudar hoje?"
+                   FontSize="16"
+                   TextColor="#333333"
+                   HorizontalOptions="Start" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1" Padding="30,0">
+            <VerticalStackLayout Spacing="20" Padding="0,10">
+                
+                <Border BackgroundColor="White"
+                        Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 15,15,15,15"
+                        Padding="20"
+                        Margin="0,0,0,0">
+                    <Border.Shadow>
+                        <Shadow Brush="#40000000"
+                                Offset="0,2"
+                                Radius="8"
+                                Opacity="0.1" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMinhasEquipesClicked" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                        <Label Grid.Column="0"
+                               Text="👥"
+                               FontSize="28"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center" />
+                        <Label Grid.Column="1"
+                               Text="Minhas equipes"
+                               FontSize="16"
+                               FontAttributes="Italic"
+                               TextColor="#333333"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 15,15,15,15"
+                        Padding="20"
+                        Margin="0,0,0,0">
+                    <Border.Shadow>
+                        <Shadow Brush="#40000000"
+                                Offset="0,2"
+                                Radius="8"
+                                Opacity="0.1" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCriarEquipeClicked" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                        <Grid Grid.Column="0" 
+                              WidthRequest="40"
+                              HeightRequest="40"
+                              HorizontalOptions="Start"
+                              VerticalOptions="Center">
+                            <Label Text="👤"
+                                   FontSize="24"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                            <Label Text="+"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#333333"
+                                   Margin="20,0,0,0"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start" />
+                        </Grid>
+                        <Label Grid.Column="1"
+                               Text="Criar uma nova equipe"
+                               FontSize="16"
+                               FontAttributes="Italic"
+                               TextColor="#333333"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 15,15,15,15"
+                        Padding="20"
+                        Margin="0,0,0,0">
+                    <Border.Shadow>
+                        <Shadow Brush="#40000000"
+                                Offset="0,2"
+                                Radius="8"
+                                Opacity="0.1" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnEntrarComCodigoClicked" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                        <Label Grid.Column="0"
+                               Text="🔍"
+                               FontSize="28"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center" />
+                        <Label Grid.Column="1"
+                               Text="Entrar em uma equipe com código"
+                               FontSize="16"
+                               FontAttributes="Italic"
+                               TextColor="#333333"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <components:BottomNavigationBar x:Name="BottomNavBar" Grid.Row="2" />
+        
+    </Grid>
+</ContentPage>
+

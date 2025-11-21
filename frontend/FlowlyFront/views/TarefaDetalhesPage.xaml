@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowlyFront.views.TarefaDetalhesPage"
+             BackgroundColor="#F5F5F5">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16">
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+            <Button Text="‹" Clicked="OnVoltarClicked" WidthRequest="36" HeightRequest="36" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+            <Label Grid.Column="1" x:Name="TituloLabel" Text="Nome da tarefa" FontAttributes="Bold" FontSize="22" TextColor="#0E1F44" VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Conteúdo -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="12">
+                <Label x:Name="CriadaEmLabel" Text="Criada em dd/MM/yyyy" TextColor="#6B6B6B" />
+                <Label x:Name="PrazoLabel" Text="Prazo" TextColor="#6B6B6B" />
+                <Frame BackgroundColor="White" BorderColor="#E0E0E0" CornerRadius="12" Padding="12">
+                    <VerticalStackLayout Spacing="8">
+                        <Label x:Name="StatusLabel" Text="Pendente" TextColor="#6B6B6B" />
+                        <Label Text="Dificuldade:" FontAttributes="Bold" TextColor="#0E1F44" />
+                        <Label x:Name="DificuldadeLabel" Text="Definir" TextColor="#0E1F44" />
+                        <Label Text="Prioridade:" FontAttributes="Bold" TextColor="#0E1F44" />
+                        <Label x:Name="PrioridadeLabel" Text="Definir" TextColor="#0E1F44" />
+                        <Label Text="Descrição:" FontAttributes="Bold" TextColor="#0E1F44" />
+                        <Label x:Name="DescricaoLabel" Text="" TextColor="#0E1F44" />
+                        <Border x:Name="AtribuicaoCard" BackgroundColor="Transparent" Stroke="#E0E0E0" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="12" Margin="0,6">
+                            <VerticalStackLayout>
+                                <Label x:Name="AtribuicaoTitulo" Text="Esta tarefa ainda não foi atribuída" TextColor="#0E1F44" />
+                                <Button x:Name="AcaoButton" Text="Pegar tarefa" Clicked="OnAcaoButtonClicked" BackgroundColor="#337BFF" TextColor="White" CornerRadius="16" HeightRequest="44" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Espaço inferior para estética -->
+        <Grid Grid.Row="2" />
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowlyFront.views.MinhasEquipesPage"
+             BackgroundColor="#F0F0F0">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20">
+
+        <!-- Header com botão voltar -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="12" VerticalOptions="Center">
+            <Button Text="‹" WidthRequest="36" HeightRequest="36" Clicked="OnBackClicked" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+            <Label Text="Minhas equipes" FontSize="24" FontAttributes="Bold" TextColor="#0E1F44" />
+        </HorizontalStackLayout>
+
+        <!-- Mensagens -->
+        <Label x:Name="MessageLabel" Grid.Row="1" Text="" IsVisible="False" />
+
+        <CollectionView x:Name="EquipesCollection" Grid.Row="2" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="White"
+                            Stroke="#337BFF"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12,12,12,12"
+                            Padding="14"
+                            Margin="0,12">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEquipeTapped" CommandParameter="{Binding}" />
+                            </Grid.GestureRecognizers>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding nome}" FontAttributes="Bold" FontSize="16" TextColor="#0E1F44" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding descricao}" FontSize="13" TextColor="#6B6B6B" />
+                            <Label Grid.Row="2" Grid.Column="0" Text="{Binding code, StringFormat='Código: {0}'}" FontSize="12" TextColor="#6B6B6B" />
+                            <Label Grid.RowSpan="2" Grid.Column="1" Text="•••" FontSize="20" TextColor="#A0A0A0" VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnEquipeMenuTapped" CommandParameter="{Binding}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="3"
+                Text="Criar equipe"
+                Clicked="OnCriarEquipeClicked"
+                BackgroundColor="#337BFF"
+                TextColor="White"
+                Margin="0,12,0,0" />
+    </Grid>
+</ContentPage>

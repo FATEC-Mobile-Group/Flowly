@@ -1,0 +1,95 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowlyFront.views.RegisterPage"
+             BackgroundColor="#F0F0F0"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Padding="25,60,25,25" Spacing="20">
+
+        <Label Text="Criar Conta"
+               FontAttributes="Bold"
+               FontSize="26"
+               TextColor="Black"
+               HorizontalOptions="Center"
+               Margin="0,0,0,10" />
+
+        <Label x:Name="MessageLabel"
+               Text=""
+               FontSize="14"
+               TextColor="Red"
+               HorizontalOptions="Center"
+               IsVisible="False" />
+
+        <Frame CornerRadius="8"
+               Padding="10,0"
+               BackgroundColor="White"
+               BorderColor="#337BFF"
+               HasShadow="False"
+               HeightRequest="50">
+            <Entry x:Name="NameEntry"
+                   Placeholder="Nome completo"
+                   TextColor="Black"
+                   PlaceholderColor="#888"
+                   VerticalOptions="Center" />
+        </Frame>
+
+        <Frame CornerRadius="8"
+               Padding="10,0"
+               BackgroundColor="White"
+               BorderColor="#337BFF"
+               HasShadow="False"
+               HeightRequest="50">
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Email"
+                   Keyboard="Email"
+                   TextColor="Black"
+                   PlaceholderColor="#888"
+                   VerticalOptions="Center" />
+        </Frame>
+
+        <Frame CornerRadius="8"
+               Padding="10,0"
+               BackgroundColor="White"
+               BorderColor="#337BFF"
+               HasShadow="False"
+               HeightRequest="50">
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Senha"
+                   IsPassword="True"
+                   TextColor="Black"
+                   PlaceholderColor="#888"
+                   VerticalOptions="Center" />
+        </Frame>
+
+        <Button Text="Registrar"
+                x:Name="RegisterButton"
+                BackgroundColor="#337BFF"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="8"
+                HeightRequest="50"
+                Margin="0,10,0,0" />
+
+        <Button Text="Voltar para Login"
+                x:Name="BackToLoginButton"
+                BackgroundColor="Transparent"
+                TextColor="#337BFF"
+                BorderColor="#337BFF"
+                BorderWidth="1"
+                CornerRadius="8"
+                HeightRequest="45"
+                Margin="0,10,0,0" />
+
+        <VerticalStackLayout VerticalOptions="EndAndExpand"
+                             HorizontalOptions="Center"
+                             Margin="0,40,0,0">
+            <Label Text="made by"
+                   FontSize="12"
+                   TextColor="Black"
+                   HorizontalOptions="Center"/>
+            <Image Source="logo.png"
+                   HeightRequest="24"/>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
