@@ -8,8 +8,9 @@
     <Grid RowDefinitions="*, Auto, Auto">
 
         <Grid>
-            <Image Source="mainpage.jpg"
+            <Image Source="fundo_png.png"
                    Aspect="AspectFill" />
+            <Image Source="logo_white_flowly.png" Aspect="Center"/>
 
             <GraphicsView HeightRequest="60"
                           VerticalOptions="End"
