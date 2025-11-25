@@ -21,6 +21,7 @@ namespace FlowlyFront
             Routing.RegisterRoute(nameof(TarefaDetalhesPage), typeof(TarefaDetalhesPage));
             Routing.RegisterRoute(nameof(AccountPage), typeof(FlowlyFront.views.AccountPage));
             Routing.RegisterRoute(nameof(MeusDadosPage), typeof(MeusDadosPage));
+            Routing.RegisterRoute(nameof(VerificarUsuario), typeof(VerificarUsuario));
         }
     }
 }

@@ -23,16 +23,24 @@ exports.convidarMembro = async (req, res) => {
     const url = `${process.env.BASE_URL}/convite/aceitar/${token}`;
 
     try{
-        await sendEmail(
-        email,
-        `
-        <h2>Convite para participar de uma equipe</h2>
-        <p>Você foi convidado para participar da equipe!</p>
-        <p>Clique abaixo para aceitar o convite:</p>
-        <a href="${url}" target="_blank">${url}</a>
-        <p>Este link expira em 24 horas.</p>
-        `
-        );
+        const html = `<!DOCTYPE html><html><head><meta charset="utf-8"/>
+        <style>
+        body{background:#F0F4FF;margin:0;font-family:Arial,sans-serif;color:#0E1F44}
+        .wrap{max-width:600px;margin:24px auto;background:#fff;border:1px solid #337BFF;border-radius:12px;overflow:hidden}
+        .head{background:#337BFF;color:#fff;padding:18px 24px;font-size:20px;font-weight:bold}
+        .content{padding:24px}
+        a.button{display:inline-block;background:#337BFF;color:#fff;text-decoration:none;padding:10px 16px;border-radius:8px}
+        </style></head><body>
+        <div class="wrap">
+          <div class="head">Flowly • Convite de equipe</div>
+          <div class="content">
+            <p>Você foi convidado para participar da equipe!</p>
+            <p><a class="button" href="${url}" target="_blank">Aceitar convite</a></p>
+            <p style="color:#6B6B6B;font-size:12px">Este link expira em 24 horas.</p>
+          </div>
+        </div>
+        </body></html>`;
+        await sendEmail(email, 'Convite para participar de uma equipe', null, html);
     } catch (err) {
       console.error('Erro ao enviar email de convite:', err.message);
     }

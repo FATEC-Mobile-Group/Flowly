@@ -33,6 +33,12 @@ public partial class RegisterPage : ContentPage
         {
             ShowMessage(mensagem, isError: false);
             await Task.Delay(1000);
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(email))
+                    await SecureStorage.SetAsync("user_email", email);
+            }
+            catch { }
             await Shell.Current.GoToAsync(nameof(VerificarUsuario));
         }
         else

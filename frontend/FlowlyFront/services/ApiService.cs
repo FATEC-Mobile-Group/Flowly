@@ -42,8 +42,17 @@ namespace FlowlyFront.services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    var errorMsg = await response.Content.ReadAsStringAsync();
-                    return (false, $"Erro ao fazer login: {errorMsg}", null, null);
+                    string errorMsg;
+                    try
+                    {
+                        var errObj = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+                        errorMsg = errObj != null && errObj.TryGetValue("erro", out var val) ? val : await response.Content.ReadAsStringAsync();
+                    }
+                    catch
+                    {
+                        errorMsg = await response.Content.ReadAsStringAsync();
+                    }
+                    return (false, errorMsg, null, null);
                 }
 
                 var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
@@ -80,7 +89,9 @@ namespace FlowlyFront.services
         {
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("/api/auth/verify-code", new { codigo });
+                var email = await SecureStorage.GetAsync("user_email");
+                var payload = new { email = email ?? string.Empty, codigo };
+                var response = await _httpClient.PostAsJsonAsync("/api/auth/verify-code", payload);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -89,8 +100,27 @@ namespace FlowlyFront.services
                 else
                 {
                     var errorMsg = await response.Content.ReadAsStringAsync();
-                    return (false, $"Erro ao registrar: {errorMsg}");
+                    return (false, $"Erro ao verificar: {errorMsg}");
                 }
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Erro de conexão: {ex.Message}");
+            }
+        }
+
+        public async Task<(bool success, string mensagem)> ReenviarCodigoAsync()
+        {
+            try
+            {
+                var email = await SecureStorage.GetAsync("user_email");
+                var response = await _httpClient.PostAsJsonAsync("/api/auth/resend-code", new { email = email ?? string.Empty });
+                if (response.IsSuccessStatusCode)
+                {
+                    return (true, "Código reenviado para seu email.");
+                }
+                var errorMsg = await response.Content.ReadAsStringAsync();
+                return (false, $"Erro ao reenviar código: {errorMsg}");
             }
             catch (Exception ex)
             {

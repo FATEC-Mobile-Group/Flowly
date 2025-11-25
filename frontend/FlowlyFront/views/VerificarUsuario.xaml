@@ -52,7 +52,8 @@
                 FontAttributes="Bold"
                 CornerRadius="8"
                 HeightRequest="45"
-                Margin="0,10,0,0" />
+                Margin="0,10,0,0"
+                Clicked="OnResendClicked" />
 
         <Button Text="Criar conta"
             x:Name="CreateAccountButton"
@@ -62,7 +63,8 @@
             BorderWidth="1"
             CornerRadius="8"
             HeightRequest="45"
-            Margin="0,10,0,0" />
+            Margin="0,10,0,0"
+            Clicked="OnCreateAccountClicked" />
 
         <VerticalStackLayout VerticalOptions="EndAndExpand"
                          HorizontalOptions="Center"

@@ -47,6 +47,11 @@ public partial class LoginPage : ContentPage
         else
         {
             ShowMessage(mensagem, isError: true);
+            if (!string.IsNullOrWhiteSpace(mensagem) && mensagem.Contains("Email não verificado"))
+            {
+                await Task.Delay(500);
+                await Shell.Current.GoToAsync(nameof(VerificarUsuario));
+            }
         }
     }
 

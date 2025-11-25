@@ -4,7 +4,7 @@
              xmlns:components="clr-namespace:FlowlyFront.components"
              x:Class="FlowlyFront.views.EquipesPage"
              Title="Equipes"
-             BackgroundColor="white"
+             BackgroundColor="#FFF6ED"
              Shell.NavBarIsVisible="False">
     
     <Grid RowDefinitions="Auto, *, Auto">

@@ -7,9 +7,10 @@ public partial class VerificarUsuario : ContentPage
     private readonly ApiService _apiService = new ApiService();
     public VerificarUsuario()
 	{
-		InitializeComponent();
+        InitializeComponent();
 
-	}
+        VerifyButton.Clicked += OnVerificarClicked;
+    }
 
     private async void OnVerificarClicked(object sender, EventArgs e)
     {
@@ -19,7 +20,7 @@ public partial class VerificarUsuario : ContentPage
 
         if (string.IsNullOrEmpty(codigo))
         {
-            ShowMessage("CÛdigo inv·lido.", isError: true);
+            ShowMessage("C√≥digo inv√°lido.", isError: true);
             return;
         }
 
@@ -28,12 +29,24 @@ public partial class VerificarUsuario : ContentPage
         if (success)
         {
             await Task.Delay(1000);
-            await Shell.Current.GoToAsync(nameof(EquipesPage));
+            await Shell.Current.GoToAsync(nameof(LoginPage));
         }
         else
         {
             ShowMessage(mensagem, isError: true);
         }
+    }
+
+    private async void OnResendClicked(object sender, EventArgs e)
+    {
+        MessageLabel.IsVisible = false;
+        var (ok, msg) = await _apiService.ReenviarCodigoAsync();
+        ShowMessage(msg, isError: !ok);
+    }
+
+    private async void OnCreateAccountClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(RegisterPage));
     }
 
     private void ShowMessage(string message, bool isError)
