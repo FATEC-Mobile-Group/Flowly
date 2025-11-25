@@ -9,6 +9,16 @@ const validatePassword = require('../utils/validatePassword.js');
 require('dotenv').config();
 
 exports.registrar = async (req, res) => {
+  
+  function generateCode(length = 6) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const bytes = crypt.randomBytes(length);
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars[bytes[i] % chars.length];
+  }
+  return result;
+}
   try {
     const { nome, email, genero, senha } = req.body;
 
@@ -30,15 +40,16 @@ exports.registrar = async (req, res) => {
     const token = await new Token({
       userId: novoUsuario._id,
       token: crypt.randomBytes(32).toString('hex'),
+      uniqueCode: generateCode(6),
       expiresAt: Date.now() + 3600000, // 1 hora
     }).save();
 
     const url = `${process.env.BASE_URL}auth/verify/${novoUsuario._id}/${token.token}`;
 
     try {
-      await sendEmail(novoUsuario.email, 'Verificação de Email', `<p>Olá ${novoUsuario.nome},</p>
-        <p>Por favor, verifique seu email clicando no link: <a href="${url}">${url}</a></p>
-        <p>Obrigado!</p>`);
+      await sendEmail(novoUsuario.email, 'Verificação de Email', `Olá ${novoUsuario.nome},\
+        Por favor, verifique seu email clicando no link: ${url} ou usando o código: ${token.uniqueCode}
+        Obrigado!`);
       await novoUsuario.save();
       res.status(201).send({ message: "Um email foi enviado para verificação." });
     } catch (err) {
@@ -69,6 +80,25 @@ exports.verificarEmail = async (req, res) => {
     res.status(500).json({ erro: 'Erro ao verificar email', detalhe: err.message });
   }
 }; 
+
+exports.verificarEmailCodigo = async (req, res) => {
+  try {
+    const { userId, uniqueCode } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(400).json({ erro: 'Usuário inválido' });
+
+    const tokenDoc = await Token.findOne({ userId: user._id, uniqueCode });
+    if (!tokenDoc) return res.status(400).json({ erro: 'Código inválido ou expirado' });
+
+    await User.updateOne({ _id: user._id }, { $set: { verificado: true } });
+    await Token.deleteOne({ _id: tokenDoc._id });
+
+    res.status(200).json({ message: 'Email verificado com sucesso!' });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao verificar email', detalhe: err.message });
+  }
+};
 
 exports.login = async (req, res) => {
   try {

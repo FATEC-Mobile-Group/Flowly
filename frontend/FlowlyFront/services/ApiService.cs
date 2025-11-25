@@ -63,7 +63,7 @@ namespace FlowlyFront.services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return (true, "Usu�rio registrado com sucesso!");
+                    return (true, "Usuário registrado com sucesso!");
                 }
                 else
                 {
@@ -73,7 +73,28 @@ namespace FlowlyFront.services
             }
             catch (Exception ex)
             {
-                return (false, $"Erro de conex�o: {ex.Message}");
+                return (false, $"Erro de conexão: {ex.Message}");
+            }
+        }
+        public async Task<(bool success, string mensagem)> VerificarCodigo(string codigo)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync("/api/auth/verify-code", new { codigo });
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return (true, "Usuário verificado com sucesso!");
+                }
+                else
+                {
+                    var errorMsg = await response.Content.ReadAsStringAsync();
+                    return (false, $"Erro ao registrar: {errorMsg}");
+                }
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Erro de conexão: {ex.Message}");
             }
         }
 

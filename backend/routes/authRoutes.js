@@ -8,6 +8,7 @@ router.post('/registrar', authController.registrar);
 router.post('/login', authController.login);
 router.get('/users', authController.listarUsuarios);
 router.get('/verify/:userId/:token', authController.verificarEmail);
+router.get('/verify-code/:userId/:uniqueCode', authController.verificarEmailCodigo);
 router.get('/me', auth, authMiddleware, authController.me);
 router.post('/change-password', auth, authMiddleware, authController.alterarSenha);
 

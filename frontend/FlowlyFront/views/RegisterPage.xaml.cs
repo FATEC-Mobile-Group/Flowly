@@ -33,7 +33,7 @@ public partial class RegisterPage : ContentPage
         {
             ShowMessage(mensagem, isError: false);
             await Task.Delay(1000);
-            await Shell.Current.GoToAsync(nameof(LoginPage));
+            await Shell.Current.GoToAsync(nameof(VerificarUsuario));
         }
         else
         {
