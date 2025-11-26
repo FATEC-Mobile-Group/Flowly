@@ -1,0 +1,26 @@
+# Pipeline para deploy automático no DockerHub e depois na Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build Docker image
+      run: docker build -t pedrolshernandes/flowlyapp:latest .
+
+    - name: Push Docker image to DockerHub
+      run: docker push pedrolshernandes/flowlyapp:latest
