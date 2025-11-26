@@ -16,6 +16,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.set('trust proxy', true);
+app.use(express.urlencoded({ extended: true }));
 
 // Rotas
 app.use('/api/auth', authRoutes);
