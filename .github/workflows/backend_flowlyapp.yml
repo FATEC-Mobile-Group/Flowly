@@ -29,6 +29,12 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Remove unneeded files
+        run: |
+          rm -rf .git
+          rm -rf .github
+          rm -rf tests
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -52,4 +58,5 @@ jobs:
           app-name: 'flowlyapp'
           slot-name: 'Production'
           package: .
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_343867C9C22443158D3CFAB194B70BAA }}
