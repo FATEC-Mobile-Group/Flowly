@@ -11,6 +11,7 @@ try {
     console.log(fs.readdirSync("./controllers"));
 } catch (err) {
     console.log("Erro ao acessar /controllers:", err.message);
+    
 }
 
 mongoose.connect(process.env.MONGO_URI)
