@@ -1,6 +1,7 @@
 const Tarefa = require('../models/Tarefa');
 const User = require('../models/User');
 const Projeto = require('../models/Projeto');
+const Equipe = require('../models/Equipe');
 
 // ADMIN cria tarefa
 exports.criarTarefa = async (req, res) => {
@@ -52,15 +53,14 @@ exports.criarTarefa = async (req, res) => {
   }
 };
 
-// MEMBRO: listar tarefas publicas
+// MEMBRO: listar tarefas públicas
 exports.listarTarefas = async (req, res) => {
   try {
     const tarefas = await Tarefa.find({ visivelAtodos: true })
-      .populate('equipe', 'nome')
-        .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 });
     res.status(200).json(tarefas);
-    } catch (err) {
-    res.status(500).json({ erro: 'Erro ao listar tarefas' });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao listar tarefas', detalhe: err.message });
   }
 };
 
@@ -68,11 +68,10 @@ exports.listarTarefas = async (req, res) => {
 exports.listarTarefasPrivadas = async (req, res) => {
   try {
     const tarefas = await Tarefa.find({ visivelAtodos: false })
-      .populate('equipe', 'nome')
       .sort({ createdAt: -1 });
     res.status(200).json(tarefas);
   } catch (err) {
-    res.status(500).json({ erro: 'Erro ao listar tarefas' });
+    res.status(500).json({ erro: 'Erro ao listar tarefas', detalhe: err.message });
   }
 };
 
@@ -123,8 +122,16 @@ exports.associarTarefa = async (req, res) => {
   try {
     const tarefa = await Tarefa.findById(req.params.id);
     if (!tarefa) return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    const userId = req.user && req.user.id;
+    if (!userId) return res.status(401).json({ erro: 'Usuário não autenticado' });
+    const proj = await Projeto.findById(tarefa.projeto);
+    if (!proj) return res.status(400).json({ erro: 'Projeto inválido' });
+    const equipeDoc = await Equipe.findById(proj.equipe);
+    if (!equipeDoc) return res.status(404).json({ erro: 'Equipe do projeto não encontrada' });
+    const membro = (equipeDoc.membros || []).some(m => String(m.user) === String(userId));
+    if (!membro) return res.status(403).json({ erro: 'Acesso negado: não é membro da equipe' });
 
-    tarefa.associado = req.user.id;
+    tarefa.associado = userId;
     tarefa.status = 'em_andamento';
     await tarefa.save();
 
@@ -139,6 +146,14 @@ exports.desassociarTarefa = async (req, res) => {
   try {
     const tarefa = await Tarefa.findById(req.params.id);
     if (!tarefa) return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    const userId = req.user && req.user.id;
+    if (!userId) return res.status(401).json({ erro: 'Usuário não autenticado' });
+    const proj = await Projeto.findById(tarefa.projeto);
+    if (!proj) return res.status(400).json({ erro: 'Projeto inválido' });
+    const equipeDoc = await Equipe.findById(proj.equipe);
+    if (!equipeDoc) return res.status(404).json({ erro: 'Equipe do projeto não encontrada' });
+    const membro = (equipeDoc.membros || []).some(m => String(m.user) === String(userId));
+    if (!membro) return res.status(403).json({ erro: 'Acesso negado: não é membro da equipe' });
 
     tarefa.associado = null;
     tarefa.status = 'pendente';
@@ -147,6 +162,31 @@ exports.desassociarTarefa = async (req, res) => {
     res.status(200).json({ message: 'Tarefa desassociada com sucesso', tarefa });
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao desassociar tarefa' });
+  }
+};
+
+// MEMBRO: concluir tarefa atribuída a si
+exports.concluirTarefa = async (req, res) => {
+  try {
+    const tarefa = await Tarefa.findById(req.params.id);
+    if (!tarefa) return res.status(404).json({ erro: 'Tarefa não encontrada' });
+    const userId = req.user && req.user.id;
+    if (!userId) return res.status(401).json({ erro: 'Usuário não autenticado' });
+    if (String(tarefa.associado) !== String(userId)) {
+      return res.status(403).json({ erro: 'Somente o usuário associado pode concluir a tarefa' });
+    }
+    const proj = await Projeto.findById(tarefa.projeto);
+    if (!proj) return res.status(400).json({ erro: 'Projeto inválido' });
+    const equipeDoc = await Equipe.findById(proj.equipe);
+    if (!equipeDoc) return res.status(404).json({ erro: 'Equipe do projeto não encontrada' });
+    const membro = (equipeDoc.membros || []).some(m => String(m.user) === String(userId));
+    if (!membro) return res.status(403).json({ erro: 'Acesso negado: não é membro da equipe' });
+
+    tarefa.status = 'concluido';
+    await tarefa.save();
+    res.status(200).json({ message: 'Tarefa concluída com sucesso', tarefa });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao concluir tarefa' });
   }
 };
 

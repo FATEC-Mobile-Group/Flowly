@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-module.exports = async (email, subject, text) => {
+module.exports = async (email, subject, text, html) => {
     try {
         // Configuração do transporte de e-mail
         const transporter = nodemailer.createTransport({
@@ -14,12 +14,15 @@ module.exports = async (email, subject, text) => {
             }
         });
 
-        const info = await transporter.sendMail({
+        const mailOptions = {
             from: process.env.AUTH_EMAIL,
             to: email,
-            subject: subject,
-            text: text
-        });
+            subject: subject || 'Flowly',
+            text: text || undefined,
+            html: html || undefined
+        };
+
+        const info = await transporter.sendMail(mailOptions);
 
         return info;
     } catch (error) {

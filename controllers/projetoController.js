@@ -60,8 +60,19 @@ exports.criarProjeto = async (req, res) => {
 exports.listarProjetos = async (req, res) => {
   try {
     const { equipe } = req.query;
+    const userId = req.user && req.user.id;
     const filtro = {};
-    if (equipe) filtro.equipe = equipe;
+    if (equipe) {
+      filtro.equipe = equipe;
+      const equipeDoc = await Equipe.findById(equipe);
+      if (!equipeDoc) return res.status(404).json({ erro: 'Equipe não encontrada' });
+      const membro = (equipeDoc.membros || []).some(m => String(m.user) === String(userId));
+      if (!membro) return res.status(403).json({ erro: 'Acesso negado: não é membro da equipe' });
+    } else {
+      // Sem equipe específica: listar apenas projetos das equipes do usuário
+      const equipesDoUsuario = await Equipe.find({ 'membros.user': userId }).select('_id');
+      filtro.equipe = { $in: equipesDoUsuario.map(e => e._id) };
+    }
 
     const projetos = await Projeto.find(filtro)
       .populate('equipe', 'nome')
@@ -75,8 +86,14 @@ exports.listarProjetos = async (req, res) => {
 // Obter projeto por ID
 exports.obterProjeto = async (req, res) => {
   try {
-    const projeto = await Projeto.findById(req.params.id).populate('equipe', 'nome');
+    const projeto = await Projeto.findById(req.params.id).populate('equipe', 'nome membros');
     if (!projeto) return res.status(404).json({ erro: 'Projeto não encontrado' });
+    const userId = req.user && req.user.id;
+    if (!userId) return res.status(401).json({ erro: 'Usuário não autenticado' });
+    const equipeDoc = await Equipe.findById(projeto.equipe);
+    if (!equipeDoc) return res.status(404).json({ erro: 'Equipe não encontrada' });
+    const membro = (equipeDoc.membros || []).some(m => String(m.user) === String(userId));
+    if (!membro) return res.status(403).json({ erro: 'Acesso negado: não é membro da equipe' });
     res.json(projeto);
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao buscar projeto' });
