@@ -142,7 +142,11 @@ exports.login = async (req, res) => {
 exports.listarUsuarios = async (req, res) => {
   try {
     const users = await User.find().select('nome email');
-    res.json(users);
+    if(users.length === 0) {
+      return res.status(404).json({ erro: 'Nenhum usuário encontrado' });
+    } else {
+      res.json(users);
+    }
   } catch (err) {
     res.status(500).json({ erro: 'Erro ao listar usuários', detalhe: err.message });
   }
