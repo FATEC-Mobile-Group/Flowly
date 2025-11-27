@@ -42,6 +42,7 @@ git clone https://github.com/FATEC-Mobile-Group/Flowly.git
 cd Flowly
 ```
 ### 🔧 2. Backend — Instalação e Execução
+*O* ***Flowly*** *estará rodando na nuvem até o dia 05/12/2025, não necessitando de instalação do backend. Após a data, o passo-a-passo da instalação é:*
 > Dentro da pasta backend:
 - Instalar dependências:
 ```bash
@@ -62,7 +63,7 @@ BASE_URL=url_base(como localhost ou servidor)
 ```
 - Rodar servidor:
 ```bash
-npm start
+node app.js
 ```
 
 ### 📱 2. Frontend — Instalação e Execução
