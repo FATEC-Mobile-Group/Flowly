@@ -61,8 +61,6 @@ exports.registrar = async (req, res) => {
           <p>Olá, somos da equipe Flowly, para prosseguir com o cadastro confirme que esse email é seu, desde já agradecemos pela atenção.</p>
           <p>Seu código de verificação:</p>
           <div class="code">${token.uniqueCode}</div>
-          <p>Ou clique no botão abaixo para verificar seu email:</p>
-          <a href="https://${process.env.BASE_URL}/api/verify/${novoUsuario._id}/${token.token}" style="display:inline-block;margin-top:12px;padding:12px 24px;background:#337BFF;color:#fff;text-decoration:none;border-radius:8px;">Verificar Email</a>
         </div>
         <div class="foot">Se você não solicitou, ignore este email.</div>
       </div>
