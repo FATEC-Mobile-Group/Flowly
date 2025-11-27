@@ -2,6 +2,6 @@ namespace FlowlyFront.services
 {
     public static class ApiConfig
     {
-        public const string BaseUrl = "http://localhost:3000";
+        public const string BaseUrl = "https://flowlyapp.azurewebsites.net";
     }
 }

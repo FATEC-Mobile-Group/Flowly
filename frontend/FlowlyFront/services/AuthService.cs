@@ -9,7 +9,7 @@ namespace FlowlyFront.Services
     {
         private static readonly HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("http://localhost:5000")
+            BaseAddress = new Uri("https://flowlyapp.azurewebsites.net")
         };
 
         public static async Task<bool> LoginAsync(string email, string senha)
