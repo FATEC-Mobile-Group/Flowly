@@ -29,6 +29,7 @@ Seu objetivo é oferecer uma experiência fluida para equipes e usuários indivi
 - **Express.js**
 - **MongoDB**
 - **Azure**
+- **Nodemailer**
 
 ---
 
