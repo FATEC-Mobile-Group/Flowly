@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGO_URI)
     app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
   })
   .catch((err) => console.error(err));
-  
+
 // Middleware
 app.use(cors({
   origin: '*',
