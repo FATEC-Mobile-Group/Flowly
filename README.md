@@ -28,6 +28,7 @@ Seu objetivo é oferecer uma experiência fluida para equipes e usuários indivi
 - **Node.js**
 - **Express.js**
 - **MongoDB**
+- **Azure**
 
 ---
 
