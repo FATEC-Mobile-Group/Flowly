@@ -128,7 +128,7 @@ exports.login = async (req, res) => {
     const verificar = user.verificado;
     if (!verificar) return res.status(401).json({ erro: 'Email não verificado, por favor confirme seu email' });
     const senhaValida = await argon2.verify(user.senha, senha);
-    if (!senhaValida) return res.status(401).json({ erro: 'Senha inválida' });
+    if (!senhaValida) return res.status(401).json({ erro: 'Email ou senha inválida' });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
