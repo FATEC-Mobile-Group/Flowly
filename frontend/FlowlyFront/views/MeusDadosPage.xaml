@@ -19,7 +19,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="user.svg" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
+                        <Image Source="profile.png" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
                         <Label x:Name="NomeLabel" Grid.Column="1" VerticalOptions="Center" FontSize="16" TextColor="#0E1F44" Text="Nome: -" />
                     </Grid>
 
@@ -31,7 +31,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="user.svg" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
+                        <Image Source="email.png" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
                         <Label x:Name="EmailLabel" Grid.Column="1" VerticalOptions="Center" FontSize="16" TextColor="#0E1F44" Text="Email: -" />
                     </Grid>
                 </VerticalStackLayout>

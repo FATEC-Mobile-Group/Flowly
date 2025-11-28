@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlowlyFront.views.CriarEquipePage"
-             BackgroundColor="#F5F5F5">
+             BackgroundColor="#F0F0F0">
     <ScrollView>
         <VerticalStackLayout Padding="24" Spacing="16">
             <Label x:Name="HeaderLabel" Text="Criar equipe" FontSize="26" FontAttributes="Bold" TextColor="#0E1F44" />

@@ -4,7 +4,7 @@
              xmlns:conv="clr-namespace:FlowlyFront.converters"
              xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls"
              x:Class="FlowlyFront.views.ProjetoDetalhesPage"
-             BackgroundColor="White">
+             BackgroundColor="#F0F0F0">
 
     <ContentPage.Resources>
         <conv:StatusToFriendlyConverter x:Key="StatusToFriendlyConverter" />
@@ -14,7 +14,13 @@
     <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="16">
         <!-- Header -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-            <Button Text="‹" Clicked="OnVoltarClicked" WidthRequest="36" HeightRequest="36" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+            <Button WidthRequest="10"
+                    HeightRequest="10"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#ECECEC"
+                    CornerRadius="12"
+                    ImageSource="back.png"
+                    Padding="0" />
             <Label Grid.Column="1" x:Name="TituloLabel" Text="Nome do projeto" FontAttributes="Bold" FontSize="22" TextColor="#0E1F44" VerticalOptions="Center" />
             <Button Grid.Column="2" Text="≡" Clicked="OnHamburguerClicked" WidthRequest="36" HeightRequest="36" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
         </Grid>
@@ -23,20 +29,39 @@
         <Grid Grid.Row="1" ColumnDefinitions="*,*,*" Margin="0,12,0,8">
             <Border Stroke="#6F63E7" StrokeThickness="1" BackgroundColor="White" Padding="8">
                 <Border.StrokeShape>
-                    <shapes:RoundRectangle CornerRadius="16" />
+                    <shapes:RoundRectangle CornerRadius="16,0,16,0" />
                 </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="#00000033"
+                            Offset="0,4"
+                            Radius="8"
+                            Opacity="0.4" />
+                </Border.Shadow>
+
                 <Button Text="Tarefas" TextColor="#0E1F44" BackgroundColor="Transparent" Clicked="OnTabTarefasClicked" />
             </Border>
             <Border Grid.Column="1" Stroke="#6F63E7" StrokeThickness="1" BackgroundColor="White" Padding="8">
                 <Border.StrokeShape>
-                    <shapes:RoundRectangle CornerRadius="16" />
+                    <shapes:RoundRectangle CornerRadius="0" />
                 </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="#00000033"
+                        Offset="0,4"
+                        Radius="8"
+                        Opacity="0.4" />
+                </Border.Shadow>
                 <Button Text="Membros" TextColor="#0E1F44" BackgroundColor="Transparent" Clicked="OnTabMembrosClicked" />
             </Border>
             <Border Grid.Column="2" Stroke="#6F63E7" StrokeThickness="1" BackgroundColor="White" Padding="8">
                 <Border.StrokeShape>
-                    <shapes:RoundRectangle CornerRadius="16" />
+                    <shapes:RoundRectangle CornerRadius="0,16,0,16" />
                 </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="#00000033"
+                        Offset="0,4"
+                        Radius="8"
+                        Opacity="0.4" />
+                </Border.Shadow>
                 <Button Text="Estatísticas" TextColor="#0E1F44" BackgroundColor="Transparent" Clicked="OnTabStatsClicked" />
             </Border>
         </Grid>

@@ -11,9 +11,11 @@ namespace FlowlyFront
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("Poppins-Regular.ttf", "Poppins");
-                    fonts.AddFont("Poppins-SemiBold.ttf", "PoppinsSemiBold");
                     fonts.AddFont("Poppins-Bold.ttf", "PoppinsBold");
+                    fonts.AddFont("Poppins-Italic.ttf", "PoppinsItalic");
+                    fonts.AddFont("Poppins-Medium.ttf", "PoppinsMedium");
+                    fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
+                    fonts.AddFont("Poppins-SemiBold.ttf", "PoppinsSemiBold");
                 });
 
 #if DEBUG

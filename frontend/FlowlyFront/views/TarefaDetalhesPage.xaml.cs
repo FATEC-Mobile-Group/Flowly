@@ -122,7 +122,7 @@ public partial class TarefaDetalhesPage : ContentPage
         }
     }
 
-    private async void OnVoltarClicked(object sender, EventArgs e)
+    private async void OnBackClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("..");
     }

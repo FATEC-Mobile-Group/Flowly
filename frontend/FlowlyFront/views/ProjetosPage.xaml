@@ -2,20 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlowlyFront.views.ProjetosPage"
-             BackgroundColor="#F5F5F5">
+             BackgroundColor="#F0F0F0">
   <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Padding="20">
     <!-- Header -->
     <HorizontalStackLayout Grid.Row="0" Spacing="12" VerticalOptions="Center">
-      <Button Text="‹" WidthRequest="36" HeightRequest="36" Clicked="OnBackClicked" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
-      <Label x:Name="EquipeNomeLabel" Text="Nome da equipe" FontSize="22" FontAttributes="Bold" TextColor="#0E1F44" />
+            <Button WidthRequest="10"
+                    HeightRequest="10"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#ECECEC"
+                    CornerRadius="12"
+                    ImageSource="back.png"
+                    Padding="0" />
+
+            <Label x:Name="EquipeNomeLabel" Text="Nome da equipe" FontSize="22" FontAttributes="Bold" TextColor="#0E1F44" />
     </HorizontalStackLayout>
 
     <!-- Subheader -->
-    <Label Grid.Row="1" Text="Projetos" FontSize="14" TextColor="#6B6B6B" Margin="0,6,0,6" />
+        <Label Grid.Row="1" Text="Projetos" FontSize="14" TextColor="#6B6B6B" Margin="0,6,0,6" />
 
-    <!-- Search removida conforme solicitação -->
-
-    <!-- List -->
+        <!-- List -->
     <CollectionView x:Name="ProjetosCollection" Grid.Row="2" SelectionMode="None">
       <CollectionView.ItemsLayout>
         <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />

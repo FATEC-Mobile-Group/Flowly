@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlowlyFront.views.TarefaDetalhesPage"
-             BackgroundColor="#F5F5F5">
+             BackgroundColor="#F0F0F0">
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="16">
         <!-- Header -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-            <Button Text="‹" Clicked="OnVoltarClicked" WidthRequest="36" HeightRequest="36" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+            <Button WidthRequest="10"
+                    HeightRequest="10"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#ECECEC"
+                    CornerRadius="12"
+                    ImageSource="back.png"
+                    Padding="0" />
             <Label Grid.Column="1" x:Name="TituloLabel" Text="Nome da tarefa" FontAttributes="Bold" FontSize="22" TextColor="#0E1F44" VerticalOptions="Center" />
         </Grid>
 

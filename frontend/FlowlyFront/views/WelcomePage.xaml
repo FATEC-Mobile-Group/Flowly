@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlowlyFront.views.WelcomePage"
              Title="WelcomePage"
-             BackgroundColor="#FFF9F4"
+             BackgroundColor="#FFF6ED"
              Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*, Auto, Auto">
 
@@ -25,7 +25,7 @@
 
             <Button Text="Criar conta"
                     x:Name="CreateAccountButton"
-                    BackgroundColor="#6DC3BB"
+                    BackgroundColor="#337BFF"
                     TextColor="White"
                     FontAttributes="Bold"
                     CornerRadius="10"
@@ -34,7 +34,7 @@
 
             <Button Text="Entrar"
                     x:Name="LoginButton"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="White"
                     TextColor="#337BFF"
                     BorderColor="#337BFF"
                     BorderWidth="1"

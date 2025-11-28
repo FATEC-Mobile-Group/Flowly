@@ -9,7 +9,13 @@
 
             <!-- Header com botão voltar -->
             <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
-                <Button Text="‹" WidthRequest="36" HeightRequest="36" Clicked="OnBackClicked" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+                <Button WidthRequest="10"
+                        HeightRequest="10"
+                        Clicked="OnBackClicked"
+                        BackgroundColor="#ECECEC"
+                        CornerRadius="12"
+                        ImageSource="back.png"
+                        Padding="0" />
                 <Label Text="Minha conta" FontSize="22" FontAttributes="Bold" TextColor="#0E1F44" />
             </HorizontalStackLayout>
 
@@ -28,8 +34,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="user.svg" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
-                        <Label Text="Meus dados" VerticalOptions="Center" FontSize="16" TextColor="#0E1F44" Grid.Column="1" />
+                        <Image Source="config.png" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
+                        <Label Text="Meus dados" VerticalOptions="Center" FontSize="16" TextColor="#0E1F44" Grid.Column="1" Padding="10" />
                         <Label Text="›" TextColor="#A0A0A0" VerticalOptions="Center" Grid.Column="2" />
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnMeusDadosTapped" />
@@ -42,7 +48,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="logout.svg" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
+                        <Image Source="logout.png" WidthRequest="28" HeightRequest="28" Grid.Column="0" />
                         <Button Text="Sair" BackgroundColor="Transparent" TextColor="#E04B4B" FontAttributes="Bold" Grid.Column="1" Clicked="OnLogoutClicked" HorizontalOptions="Start" />
                     </Grid>
 

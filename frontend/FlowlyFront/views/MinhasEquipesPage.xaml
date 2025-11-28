@@ -7,7 +7,13 @@
 
         <!-- Header com botão voltar -->
         <HorizontalStackLayout Grid.Row="0" Spacing="12" VerticalOptions="Center">
-            <Button Text="‹" WidthRequest="36" HeightRequest="36" Clicked="OnBackClicked" BackgroundColor="#ECECEC" TextColor="#0E1F44" CornerRadius="12" />
+            <Button WidthRequest="10"
+                    HeightRequest="10"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#ECECEC"
+                    CornerRadius="12"
+                    ImageSource="back.png"
+                    Padding="0" />
             <Label Text="Minhas equipes" FontSize="24" FontAttributes="Bold" TextColor="#0E1F44" />
         </HorizontalStackLayout>
 

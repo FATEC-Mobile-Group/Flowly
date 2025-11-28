@@ -57,9 +57,7 @@ public partial class RegisterPage : ContentPage
     private void OnTogglePasswordClicked(object sender, EventArgs e)
     {
         PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
-        // Alternar entre ícone de olho (senha oculta = mostrar, senha visível = ocultar)
-        // Quando IsPassword é true, mostramos "👁" (mostrar senha)
-        // Quando IsPassword é false, mostramos "👁️" (ocultar senha)
-        TogglePasswordButton.Text = PasswordEntry.IsPassword ? "👁" : "👁️";
+       
+        TogglePasswordButton.ImageSource = PasswordEntry.IsPassword ? "eye.png" : "eyeoff.png";
     }
 }

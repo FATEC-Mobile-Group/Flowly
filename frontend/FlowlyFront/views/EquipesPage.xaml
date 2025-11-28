@@ -4,7 +4,7 @@
              xmlns:components="clr-namespace:FlowlyFront.components"
              x:Class="FlowlyFront.views.EquipesPage"
              Title="Equipes"
-             BackgroundColor="#FFF6ED"
+             BackgroundColor="#F0F0F0"
              Shell.NavBarIsVisible="False">
     
     <Grid RowDefinitions="Auto, *, Auto">
@@ -43,9 +43,10 @@
                         <TapGestureRecognizer Tapped="OnMinhasEquipesClicked" />
                     </Border.GestureRecognizers>
                     <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-                        <Label Grid.Column="0"
-                               Text="👥"
-                               FontSize="28"
+                        <Image Grid.Column="0"
+                               Source="group.png"
+                               WidthRequest="28"
+                               HeightRequest="28"
                                HorizontalOptions="Start"
                                VerticalOptions="Center" />
                         <Label Grid.Column="1"
@@ -78,17 +79,12 @@
                               HeightRequest="40"
                               HorizontalOptions="Start"
                               VerticalOptions="Center">
-                            <Label Text="👤"
-                                   FontSize="24"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                            <Label Text="+"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="#333333"
-                                   Margin="20,0,0,0"
+                            <Image Grid.Column="0"
+                                   Source="criarequipe.png"
+                                   WidthRequest="28"
+                                   HeightRequest="28"
                                    HorizontalOptions="Start"
-                                   VerticalOptions="Start" />
+                                   VerticalOptions="Center" />
                         </Grid>
                         <Label Grid.Column="1"
                                Text="Criar uma nova equipe"
@@ -115,9 +111,10 @@
                         <TapGestureRecognizer Tapped="OnEntrarComCodigoClicked" />
                     </Border.GestureRecognizers>
                     <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-                        <Label Grid.Column="0"
-                               Text="🔍"
-                               FontSize="28"
+                        <Image Grid.Column="0"
+                               Source="lupa.png"
+                               WidthRequest="28"
+                               HeightRequest="28"
                                HorizontalOptions="Start"
                                VerticalOptions="Center" />
                         <Label Grid.Column="1"
