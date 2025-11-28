@@ -53,4 +53,13 @@ public partial class RegisterPage : ContentPage
         MessageLabel.TextColor = isError ? Colors.Red : Colors.Green;
         MessageLabel.IsVisible = true;
     }
+
+    private void OnTogglePasswordClicked(object sender, EventArgs e)
+    {
+        PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+        // Alternar entre ícone de olho (senha oculta = mostrar, senha visível = ocultar)
+        // Quando IsPassword é true, mostramos "👁" (mostrar senha)
+        // Quando IsPassword é false, mostramos "👁️" (ocultar senha)
+        TogglePasswordButton.Text = PasswordEntry.IsPassword ? "👁" : "👁️";
+    }
 }

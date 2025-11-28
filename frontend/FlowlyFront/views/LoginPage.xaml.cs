@@ -10,15 +10,37 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
         LoginButton.Clicked += OnLoginClicked;
-        CreateAccountButton.Clicked += async (s, e) => await Shell.Current.GoToAsync(nameof(RegisterPage));
+        CreateAccountButton.Clicked += OnCreateAccountClicked;
+    }
+
+    private void OnTogglePasswordClicked(object sender, EventArgs e)
+    {
+        PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
+        // Alternar entre ícone de olho (senha oculta = mostrar, senha visível = ocultar)
+        // Quando IsPassword é true, mostramos "👁" (mostrar senha)
+        // Quando IsPassword é false, mostramos "👁️" (ocultar senha)
+        TogglePasswordButton.Text = PasswordEntry.IsPassword ? "👁" : "👁️";
+    }
+
+    private async void OnCreateAccountClicked(object sender, EventArgs e)
+    {
+        // Animação de escala ao clicar
+        await CreateAccountButton.ScaleTo(0.95, 50, Easing.SinOut);
+        await CreateAccountButton.ScaleTo(1.0, 50, Easing.SinIn);
+        
+        await Shell.Current.GoToAsync(nameof(RegisterPage));
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
     {
+        // Animação de escala ao clicar
+        await LoginButton.ScaleTo(0.95, 50, Easing.SinOut);
+        await LoginButton.ScaleTo(1.0, 50, Easing.SinIn);
+        
         string email = EmailEntry.Text?.Trim();
         string senha = PasswordEntry.Text?.Trim();
 
-        MessageLabel.IsVisible = false;
+        MessageFrame.IsVisible = false;
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
         {
@@ -58,7 +80,19 @@ public partial class LoginPage : ContentPage
     private void ShowMessage(string message, bool isError)
     {
         MessageLabel.Text = message;
-        MessageLabel.TextColor = isError ? Colors.Red : Colors.Green;
-        MessageLabel.IsVisible = true;
+        MessageFrame.IsVisible = true;
+        
+        if (isError)
+        {
+            MessageFrame.BackgroundColor = Color.FromArgb("#FEE2E2");
+            MessageFrame.BorderColor = Color.FromArgb("#FCA5A5");
+            MessageLabel.TextColor = Color.FromArgb("#DC2626");
+        }
+        else
+        {
+            MessageFrame.BackgroundColor = Color.FromArgb("#D1FAE5");
+            MessageFrame.BorderColor = Color.FromArgb("#86EFAC");
+            MessageLabel.TextColor = Color.FromArgb("#059669");
+        }
     }
 }

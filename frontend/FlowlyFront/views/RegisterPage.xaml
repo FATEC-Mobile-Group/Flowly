@@ -48,22 +48,39 @@
         </Frame>
 
         <Frame CornerRadius="8"
-               Padding="10,0"
+               Padding="10,0,5,0"
                BackgroundColor="White"
                BorderColor="#337BFF"
                HasShadow="False"
                HeightRequest="50">
-            <Entry x:Name="PasswordEntry"
-                   Placeholder="Senha"
-                   IsPassword="True"
-                   TextColor="Black"
-                   PlaceholderColor="#888"
-                   VerticalOptions="Center" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Entry x:Name="PasswordEntry"
+                       Grid.Column="0"
+                       Placeholder="Senha"
+                       IsPassword="True"
+                       TextColor="Black"
+                       PlaceholderColor="#888"
+                       VerticalOptions="Center" />
+                <Button x:Name="TogglePasswordButton"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Text="👁"
+                        FontSize="20"
+                        WidthRequest="45"
+                        HeightRequest="45"
+                        Padding="0"
+                        Margin="5,0,0,0"
+                        Clicked="OnTogglePasswordClicked" />
+            </Grid>
         </Frame>
 
         <Button Text="Registrar"
                 x:Name="RegisterButton"
-                BackgroundColor="#337BFF"
+                BackgroundColor="#6DC3BB"
                 TextColor="White"
                 FontAttributes="Bold"
                 CornerRadius="8"
@@ -83,7 +100,7 @@
         <VerticalStackLayout VerticalOptions="EndAndExpand"
                              HorizontalOptions="Center"
                              Margin="0,40,0,0">
-            <Label Text="made by"
+            <Label Text="Made with ❤️ by"
                    FontSize="12"
                    TextColor="Black"
                    HorizontalOptions="Center"/>

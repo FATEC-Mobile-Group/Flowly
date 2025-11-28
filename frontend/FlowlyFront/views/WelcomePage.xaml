@@ -25,7 +25,7 @@
 
             <Button Text="Criar conta"
                     x:Name="CreateAccountButton"
-                    BackgroundColor="#337BFF"
+                    BackgroundColor="#6DC3BB"
                     TextColor="White"
                     FontAttributes="Bold"
                     CornerRadius="10"
