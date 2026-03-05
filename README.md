@@ -74,4 +74,4 @@ node app.js
 ## 1) Fechar o VisualStudio
 ## 2) Abrir o Explorador de Arquivos -> Flow-main -> FlowFront -> Apague: bin e obj
 ## 3) Abra o projeto no Visual Studio.
-## Abra o Package Manager Console (Ferramentas > NuGet Package Manager) e execute: dotnet restore
+## 4) Abra o Package Manager Console (Ferramentas > NuGet Package Manager) e execute: dotnet restore
