@@ -69,5 +69,9 @@ node app.js
 ### 📱 2. Frontend — Instalação e Execução
 > Dentro da pasta frontend:
 - Abra a solução através do Visual Studio
-- Aguarde o programa abrir o projeto
-- Rodar o projeto no método de sua preferência (Windows Machine, Emuladores...)
+
+## OBS: Se as depêndencias do projeto não atualizarem ou impedir que o projeto, faça o seguinte:
+## 1) Fechar o VisualStudio
+## 2) Abrir o Explorador de Arquivos -> Flow-main -> FlowFront -> Apague: bin e obj
+## 3) Abra o projeto no Visual Studio.
+## Abra o Package Manager Console (Ferramentas > NuGet Package Manager) e execute: dotnet restore
