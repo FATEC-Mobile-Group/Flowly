@@ -21,9 +21,10 @@ Seu objetivo é oferecer uma experiência fluida para equipes e usuários indivi
 ## 🛠️ Tecnologias Utilizadas
 
 ### Frontend
-- **Maui**
-- **C#**
-
+- **Flutter**
+- **React**
+- **React Bits**
+- **JavaScript**
 ### Backend
 - **Node.js**
 - **Express.js**
